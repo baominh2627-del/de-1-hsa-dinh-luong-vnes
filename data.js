@@ -31,7 +31,7 @@ export const examData = [
     "id": "q3",
     "type": "fill",
     "question": "Chu kì của hàm số $y = \\sin\\left(\\frac{2}{5}x\\right).\\cos\\left(\\frac{2}{5}x\\right)$ là $k\\pi$. Giá trị của k là",
-    "correctAnswer": "2.5",
+    "correctAnswer": "5/2",
     "explanation": "$y = \\frac{1}{2} \\sin(\\frac{4}{5}x) \\Rightarrow T = \\frac{2\\pi}{4/5} = 2.5\\pi$",
     "image": null
   },
@@ -293,7 +293,7 @@ export const examData = [
     "id": "q23",
     "type": "fill",
     "question": "Mặt sàn của một thang máy có dạng hình vuông ABCD cạnh 2m được lát gạch màu trắng và trang trí với một hình 4 cánh giống nhau màu sẫm. Khi đặt trong hệ tọa độ Oxy với $O$ là tâm hình vuông sao cho $A(1;1)$ như hình vẽ bên thì các đường cong OA có phương trình $y = x^2$ và $y = ax^3 + bx$. Tính giá trị ab biết rằng diện tích trang trí màu sẫm chiếm $\\frac{1}{3}$ diện tích mặt sàn.",
-    "correctAnswer": "-10/9",
+    "correctAnswer": "-2",
     "explanation": "Sử dụng tích phân tính diện tích giới hạn bởi 2 đường cong.",
     "image": "cau_23.png"
   },
@@ -389,7 +389,7 @@ export const examData = [
     "id": "q32",
     "type": "fill",
     "question": "Người ta xây dựng một chân tháp bằng bê tông có dạng khối chóp cụt tứ giác đều (Hình bên dưới). Cạnh đáy dưới dài 5m, cạnh đáy trên dài 2m, cạnh bên dài 3m. Biết rằng chân tháp được làm bằng bê tông tươi với giá tiền là 1470000 đồng/m$^3$. Tính số tiền để mua bê tông tươi làm chân tháp theo đơn vị đồng.",
-    "correctAnswer": "40538431",
+    "correctAnswer": "40538432",
     "explanation": "Tính thể tích chóp cụt đều rồi nhân với đơn giá.",
     "image": "cau_32.png"
   },
@@ -439,7 +439,7 @@ export const examData = [
       "20.",
       "4."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 2,
     "explanation": "Tìm giá trị lớn nhất của hàm bậc 3.",
     "image": null
   },
@@ -503,7 +503,7 @@ export const examData = [
       "$30^\\circ$.",
       "$60^\\circ$."
     ],
-    "correctAnswer": 1,
+    "correctAnswer": 3,
     "explanation": "Sử dụng định lý hàm số cosin hoặc vector.",
     "image": null
   },
@@ -581,7 +581,7 @@ export const examData = [
     "id": "q47",
     "type": "fill",
     "question": "Trong một trò chơi điện tử, có 38 con cá đói. Một con cá gọi là no nếu nó ăn được 3 con cá khác (con này có thể no hoặc không no). Một con cá no không ăn thêm con cá nào khác. Trò chơi kết thúc khi không còn con cá nào đói. Hỏi sau khi kết thúc trò chơi thì có tối đa bao nhiêu con cá no?",
-    "correctAnswer": "11",
+    "correctAnswer": "8",
     "explanation": "Lập mô hình chia hết cho 3 để tối đa số cá còn lại.",
     "image": null
   },
