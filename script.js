@@ -222,14 +222,31 @@ function restoreDOMState() {
   });
 }
 
+let warned30 = false;
+
+function showToast(msg) {
+  let t = document.getElementById("toast");
+  if (!t) {
+    t = document.createElement("div");
+    t.id = "toast";
+    document.body.appendChild(t);
+  }
+  t.textContent = msg;
+  t.classList.add("show");
+  setTimeout(() => t.classList.remove("show"), 5000);
+}
+
 function startTimer() {
+  const endAt = Date.now() + timeRemaining * 1000;
   timerInterval = setInterval(() => {
-    timeRemaining--; saveDraft();
+    timeRemaining = Math.max(0, Math.round((endAt - Date.now()) / 1000));
+    saveDraft();
     const m = Math.floor(timeRemaining / 60).toString().padStart(2, "0");
     const s = (timeRemaining % 60).toString().padStart(2, "0");
     document.getElementById("countdown").innerText = `${m}:${s}`;
-    if (timeRemaining === 30) {
-      alert("⚠️ Cảnh báo: Chỉ còn 30 giây!");
+    if (timeRemaining <= 30 && !warned30) {
+      warned30 = true;
+      showToast("⚠️ Cảnh báo: Chỉ còn 30 giây!");
       document.querySelector(".timer-pill").classList.add("timer-danger");
     }
     if (timeRemaining <= 0) { clearInterval(timerInterval); submitExam(); }
@@ -249,6 +266,23 @@ function setupAntiCheat() {
 submitBtn.addEventListener("click", () => {
   if (confirm("Bạn có chắc muốn nộp bài?")) submitExam();
 });
+
+function parseNumber(str) {
+  const t = String(str ?? "").trim().replace(/\s+/g, "").replace(",", ".");
+  if (t === "") return NaN;
+  const frac = t.match(/^(-?\d+(?:\.\d+)?)\/(-?\d+(?:\.\d+)?)$/);
+  if (frac) return Number(frac[2]) === 0 ? NaN : Number(frac[1]) / Number(frac[2]);
+  return /^-?\d+(?:\.\d+)?$/.test(t) ? Number(t) : NaN;
+}
+
+function isFillCorrect(userInput, correct) {
+  const u = String(userInput ?? "").trim().toLowerCase().replace(/\s+/g, "");
+  const c = String(correct).trim().toLowerCase().replace(/\s+/g, "");
+  if (u === "") return false;
+  if (u === c) return true;
+  const un = parseNumber(u), cn = parseNumber(c);
+  return !isNaN(un) && !isNaN(cn) && Math.abs(un - cn) < 1e-9;
+}
 
 function submitExam() {
   isFinished = true; clearInterval(timerInterval);
@@ -272,9 +306,7 @@ function submitExam() {
       }
     } else if (q.type === "fill") {
       const input = document.querySelector(`input[name="ans-${q.id}"]`);
-      const userVal = (userAnswers[q.id] || "").trim().toLowerCase();
-      const correct = String(q.correctAnswer).toLowerCase();
-      if (userVal === correct || userVal === correct.replace(".", ",")) {
+      if (isFillCorrect(userAnswers[q.id], q.correctAnswer)) {
         totalScore += 1;
         input.classList.add("correct-ans");
       } else {
@@ -327,3 +359,4 @@ document.getElementById("review-btn").addEventListener("click", () => {
   examScreen.classList.remove("hidden");
   window.scrollTo({ top: 0, behavior: "smooth" });
 });
+
